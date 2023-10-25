@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block title%}Bienvenue{% endblock %}
+{% block content%}
+
+{%if subject.name%}
+<h1 align="center">Notes : {{subject.name}} </h1>
+{%else%}
+<h1 align="center">Sujet inexistant</h1>
+{%endif%}
+    {% if  subject.notes %}
+    {% for note in subject.notes %}
+
+    {% with post=note %}
+      {% include "embed/post.html" %}
+    {% endwith %}
+
+    {% endfor %}
+    {%else%}
+    Rien n'a encore été publié sur le sujet ! Qu'attendez vous ?
+    {% endif %}
+  </ul>
+
+  <hr>
+
+<!--
+<h1 align="center">Publier une note</h1>
+
+<form method="post">
+    <div>
+      <label for="note">Contenu</label>
+      <textarea name="note" id="note" class="form-control"></textarea>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="Subject">Sujet</label>
+        <input type="text" class="form-control" id="subject" name="subject" placeholder="Sujet de publication">
+    </div>
+    <br />
+    <div align="center">
+        <button type="submit" class="btn btn-outline-primary"> Publier la note</button>
+    </div>
+</form>
+-->
+
+{% endblock %}

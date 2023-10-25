@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% block title%}Bienvenue{% endblock %}
+{% block content%}
+
+<br/>
+
+<h1 align="center">Vos notes</h1>
+<!--
+<ul class="list-group list-group-flush" id="notes">
+    {% if  user.notes %}
+    {% for note in user.notes %}
+    <li class="list-group-item">
+      <div class="card border-dark mb-3" style="max-width: 100rem;">
+        <div class="card-header">
+          <i class="fa fa-user"></i>
+          {{ user.query.filter_by(id=note.user_id).first().pseudo }} <span class="badge badge-secondary">{{ Subject.query.filter_by(id=note.subject_id).first().name }}</span>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">Dark card title</h5>
+          <p class="card-text">{{ note.data }}</p>
+        </div>
+      </div> 
+      <button type="button" class="close" onClick="deleteNote('{{ note.id }}')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </li>
+    
+    {% endfor %}
+    {%else%}
+    Vous n'avez pas encore publié de notes ! Qu'attendez vous ?
+    {% endif %}
+  </ul>
+-->
+  {% if  user.notes %}
+  {% for note in user.notes %}
+
+  {% with post=note %}
+    {% include "embed/post.html" %}
+  {% endwith %}
+
+  {% endfor %}
+  
+  {%else%}
+  Vous n'avez pas encore publié de notes ! Qu'attendez vous ?
+  {% endif %}
+  <hr>
+  
+  
+<h1 align="center">Publier une note</h1>
+
+
+<form method="post">
+  <div class="form-group">
+      <label for="Titre">Titre</label>
+      <input type="text" class="form-control" id="title" name="title" placeholder="Titre de publication">
+  </div>
+
+  {% include "embed/editor.html" %}
+
+  
+  <br />
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Sujet</label>
+    <select class="form-control" id="subject" name="subject">
+        {%for sub in Subject.query.all()%}
+          <option>{{sub.name}}</option>
+        {%endfor%}
+    </select>
+  </div>
+  
+    <br />
+    <div align="center">
+        <button type="submit" class="btn btn-outline-primary"> Publier la note</button>
+    </div>
+</form>
+
+
+{% endblock %}

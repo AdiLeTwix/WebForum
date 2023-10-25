@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% block title%}Gerer les utilisateurs {% endblock %}
+{% block content%}
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <div class="btn-group p-6 mb-4 " role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary"> <a class="text-white" href="{{ url_for('views.manage_user', sort='name') }}">Trier par nom</a></button>
+        <button type="button" class="btn btn-secondary"> <a class="text-white" href="{{ url_for('views.manage_user', sort='ID') }}">Trier par ID</a></button>
+        <button type="button" class="btn btn-secondary"> <a class="text-white" href="{{ url_for('views.manage_user', sort='role') }}">Trier par rôle</a></button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Pseudo</th>
+        <th scope="col">Adresse Mail</th>
+        <th scope="col">Rôle</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for u in users%}
+        <tr>
+            <th scope="row">{{u.id}}</th>
+            <td>{{u.pseudo}}</td>
+            <td>{{u.email}}</td>
+            <td>{{u.role}}</td>
+          </tr>
+        {%endfor%}
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+{% endblock %}

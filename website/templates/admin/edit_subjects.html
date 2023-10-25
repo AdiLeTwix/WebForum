@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block title%}Ajouter un sujet{% endblock %}
+{% block content%}
+<h1>Attention</h1> 
+Ce site est actuellment en construction ... Merci de votre patiente !
+<!---- {% if display %}
+{{user}}
+{%else%}
+inconnu.e
+{% endif %} !-->
+
+<br />
+<br />
+<br />
+<form method="post">
+    <h3 align="center">Ajouter un sujet</h3>
+
+    <div class="form-group">
+        <label for="subject">Nom du sujet</label>
+        <input type="text" class="form-control" id="subject" name="addSub" placeholder="Entrez le nom du nouveau sujet.">
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-success">Ajouter le sujet</button>
+</form>
+
+<!--REMOVE SUB-->
+
+<form method="post">
+    <h3 align="center">Retirer un sujet</h3>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Nom du sujet</label>
+        <select class="form-control" id="subject" name="removeSub">
+          {%for sub in Subject.query.all()%}
+          <option>{{sub.name}}</option>
+          {%endfor%}
+        </select>
+      </div>
+
+    <div class="custom-control custom-radio">
+        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="RM">
+        <label class="custom-control-label" for="customRadio1">Retirer tout les notes du sujet</label>
+        </div>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="MV" checked>
+        <label class="custom-control-label" for="customRadio2">Deplacer les notes sur le sujet de base</label>
+      </div>
+    <br />
+    <button type="submit" class="btn btn-danger">Retirer le sujet</button>
+
+</form>
+
+{% endblock %}

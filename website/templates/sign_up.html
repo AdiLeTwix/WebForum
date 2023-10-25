@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block title%}S'inscrire{% endblock %}
+{% block content%}
+<h1>Bienvenue sur la page d'inscription</h1> 
+Ce site est actuellment en construction ... Merci de votre patiente !
+
+<br />
+<br />
+<br />
+<form method="post">
+    <h3 align="center">S'inscrire</h3>
+    <div class="form-group">
+        <label for="email">Address mail</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre mail">
+    </div>
+    <div class="form-group">
+        <label for="Pseudo">Pseudo</label>
+        <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Entrez un pseudo">
+    </div>
+    <div class="form-group">
+        <label for="password1">Mot de passe</label>
+        <input type="password" class="form-control" id="password1" name="password1" placeholder="Entrez un mot de passe">
+    </div>
+    <div class="form-group">
+        <label for="password2">Confirmation mot de passe</label>
+        <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirmez votre mot de passe">
+    </div>
+    <div class="form-group">
+        <label for="code">Code d'invitation</label>
+        <input type="text" class="form-control" id="code" name="code" placeholder="Entrez le code d'invitation" oninput="this.value = this.value.toUpperCase()">
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Valider</button>
+</form>
+{% endblock %}

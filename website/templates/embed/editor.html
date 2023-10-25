@@ -1,0 +1,28 @@
+<div>
+  <label for="note">Contenu</label>
+  <textarea name="note" id="note" class="form-controle"></textarea>
+  <script>
+    new FroalaEditor("textarea", {
+      charCounterMax: 500,
+      pluginsEnabled: [
+        "align",
+        "charCounter",
+        "codeBeautifier",
+        "codeView",
+        "emoticons",
+        "entities",
+        "fontAwesome",
+        "fontSize",
+        "fontFamily",
+        "lineBreaker",
+        "link",
+        "lists",
+        "quote",
+        "save",
+        "table",
+        "url",
+        "markdown",
+      ],
+    });
+  </script>
+</div>

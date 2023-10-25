@@ -1,0 +1,5 @@
+flask_login
+flask_sqlalchemy
+Werkzeug==2.3.7
+SQLAlchemy
+SQLAlchemy-Utils

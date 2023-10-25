@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% block title%}Utilisateur {{target.pseudo}} {% endblock %}
+{% block content%}
+<div class="container mt-5">
+    <div class="card p-3 py-4">
+    
+    
+
+<form>
+    <h3 align="center">Information {{target.pseudo}} </h3>
+
+        
+    <div class="col-sm-auto form-row">
+        <div class="col form-group col-sm-auto">
+            <label for="email">Address mail</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="{{target.email}}" disabled>
+        </div>
+        <div class="col form-group col-sm-auto">
+            <label for="Pseudo">Pseudo</label>
+            <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="{{target.pseudo}}" disabled>
+        </div>
+
+        <div class="col form-group ">
+            <label for="Role">Role</label>
+            <input type="text" class="form-control" id="Role" name="Role" placeholder="{{target.role}}" disabled>
+        </div>
+    </div>
+
+   <hr>
+
+   <div class="col-sm-auto form-row">
+    <div class="col form-group">
+        <label for="code">Code d'invitation utilisé</label>
+        <input type="text" class="form-control" id="code" name="code" placeholder="{{code.code}}" oninput="this.value = this.value.toUpperCase()" disabled>
+    </div>
+
+    {%set nbrn = target.notes|length %}
+    <div class="col form-group col-sm-auto">
+        <label for="nbn">Nombre de notes publiées</label>
+        <input type="text" class="form-control" id="nbn" name="nbn" placeholder="{{nbrn}}" oninput="this.value = this.value.toUpperCase()" disabled>
+    </div>
+    
+    
+    </div>
+
+    <hr>
+    <h5 id="top" align="center">Dernier(s) poste(s)</h2>
+    {%for p in range(page*3,page*3+3)%}
+        {%if p < nbrn%}
+        {% with post=target.notes[nbrn-p-1] %}
+            {% include "embed/post.html" %}
+        {% endwith %}
+        {%endif%}
+    {%endfor%}
+    
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item {%if page == 0%}disabled{%endif%}">
+            <a class="page-link" href="{{ url_for('views.user', u=target.pseudo, page=page-1) }}#top" tabindex="-1"><i class="fa fa-chevron-left"></i></a>
+          </li>
+          {%for l in range((nbrn-1) // 3 + 1)%}
+          <li class="page-item {%if page == l%} active {%endif%}"><a class="page-link" href="{{ url_for('views.user', u=target.pseudo, page=l) }}#top">{{l+1}}</a></li>
+          {%endfor%}
+          <li class="page-item {%if page == ((nbrn-1) // 3)%} disabled {%endif%}">
+            <a class="page-link" href="{{ url_for('views.user', u=target.pseudo, page=page+1) }}#top"> <i class="fa fa-chevron-right"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </form>
+    {#TODO faire les pages #}
+    
+</div>
+</div>
+
+
+{% endblock %}

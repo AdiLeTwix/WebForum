@@ -1,0 +1,29 @@
+<br />
+<div class="card border-dark mb-3" style="max-width: 100rem">
+  <div class="card-header" >
+    <i class="fa fa-user"></i>
+    {%set localUser = User.query.filter_by(id=post.user_id).first().pseudo%}
+    <a href="/user/{{localUser}}" class="text-dark">{{localUser}}</a>
+    <span class="badge badge-secondary"
+      >{{ Subject.query.filter_by(id=post.subject_id).first().name }}</span
+    >
+  </div>
+  <div class="card-body text-dark">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <p class="card-text">
+      {{post.data|safe}}
+    </p>
+  </div>
+
+  <div class="card-footer">
+    <small class="text-muted">{{ (post.date) }} UTC</small> <!--BUG date-->
+
+    {%if isHome%}
+    <button type="button" class="close" onClick="deleteNote('{{ post.id }}')">
+      <i class="fa fa-trash"></i>
+    </button>
+    {%endif%}
+  </div>
+</div>
+
+<br />
