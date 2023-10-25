@@ -1,4 +1,10 @@
-# architecture:
+# DISCLAIMER
+This project is an old archive just restored. Setup instructions and massive refactoring to come.
+
+
+# Todolist
+
+## architecture:
   - [x] bouger la page "/" (home) vers une page dit "mes post"
   - [x] faie une page home publique avec tout les dernier post
   - [ ] treding post ?
@@ -10,18 +16,18 @@
   - [X] ajouter les titres
   - [X] passer les nouvelles carte dans la page subject
 
-# code invite:
+## code invite:
   - [X] verifier si il n'existe pas deja
   - [ ] les delete
   - [ ] systeme au login fonctionnel
   - [ ] logs
 
-# littls bugs:
+## littls bugs:
   - [ ] soucis de date sur les poste
   - [ ] emoticon
   - [x] soucis de retour a la ligne
 
-# idee:
+## idee:
   - [ ] mettre un logo a la place de home
   - [x] formatage des message style markdown ou autre :
     enregistrer un text mais afficher et ecrir en mkd
@@ -29,7 +35,7 @@
   - [ ] clean and usefull footer
   - [ ] fonction pour le nom des roles propre ? python deja fait
 
-# user:
+## user:
 - [ ] stats
 - [x] dernier notes si possible
 
