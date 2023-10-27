@@ -16,7 +16,7 @@ views = Blueprint('views', __name__)
 
 @views.route('/', methods=['GET','POST'])
 def welcome():
-    return render_template("subject.html", user=current_user, User=User, subject=Subject.query.filter_by(name='test').first(), Subject=Subject)
+    return render_template("subject.html", user=current_user, User=User, subject=Subject.query.filter_by(name='News').first(), Subject=Subject)
 
 
 @views.route('/my', methods=['GET', 'POST'])
@@ -115,18 +115,19 @@ def send_subject(name):
 def manage_code():
     if request.method == 'POST':
         c = request.form.get("code")
+        m = request.form.get("max_usage")
         exist = Invite.query.filter_by(code=c).first() #check if user is alerady in
         if exist:
             flash("Ce code existe déja", category='error')
         else:
-            newInv = Invite(code = c, usages=0)
+            newInv = Invite(code = c, usages=0, max=m)
             db.session.add(newInv)
             db.session.commit()
             flash("Code ajouté", category='sucesse')
 
             
     f = open("./logs/code.log", "r")
-    l = f.read()
+    l = f.read() # todo : true code logs
     f.close()
     return render_template("admin/manage_code.html", user=current_user, Subject=Subject, Invite=Invite, logs=l)
 
@@ -154,7 +155,7 @@ def user(u):
     if T:
         return render_template("user.html", user=current_user, User=User, Subject=Subject, target=T, code=Invite.query.filter_by(id=T.code_id).first(), page=page)
     else:
-        return render_template("test.html", user=current_user, Subject=Subject) # TODO page 404 user
+        return render_template("404.html", user=current_user, Subject=Subject)
 
 @views.route('/test', methods= ['GET','POST'])
 def test():

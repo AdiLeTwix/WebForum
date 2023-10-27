@@ -45,3 +45,4 @@ class Invite(db.Model):
     code = db.Column(db.String(25))
     users = db.relationship('User')
     usages = db.Column(db.Integer)
+    max = db.Column(db.Integer)

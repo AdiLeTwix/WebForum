@@ -53,7 +53,7 @@ def singup():
             if user:
                 flash("Email invalide", category='error')
             else:
-                NewUser = User(email=email, pseudo=pseudo, password=generate_password_hash(password1, method='sha256'), role=2)
+                NewUser = User(email=email, pseudo=pseudo, password=generate_password_hash(password1, method='sha256'), role=2) # todo : code d'invit link au role
                 db.session.add(NewUser)
                 db.session.commit()
                 login_user(NewUser)
