@@ -7,7 +7,7 @@ This project is an old archive just restored. Setup instructions and massive ref
 ## architecture:
   - [x] bouger la page "/" (home) vers une page dit "mes post"
   - [x] faie une page home publique avec tout les dernier post
-  - [ ] treding post ?
+  - [ ] treading post ?
   - [x] faire une page pour creer des catégories URGENT
   - [x] role ?
   - [ ] faire les perms par roles
