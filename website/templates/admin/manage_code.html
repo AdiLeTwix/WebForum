@@ -53,15 +53,20 @@ Pour avoir un nombre illimité d'utilisations, mettez -1.
  <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">Logs</th>
+      <th scope="col">Mail</th>
+      <th scope="col">Pseudo</th>
+      <th scope="col">Code</th>
       <th scope="col">Date</th>
     </tr>
   </thead>
   <tbody>
     {%for l in logs.split('\n')%}
     <tr>
-      <td>{{l}}</td>
-      <td>N/A</td>
+      {% set s = l.split(';') %}
+      <td>{{s[0]}}</td>
+      <td>{{s[1]}}</td>
+      <td>{{s[2]}}</td>
+      <td>{{s[3]}}</td>
     </tr>
     {%endfor%}
   </tbody>

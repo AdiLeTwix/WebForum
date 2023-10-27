@@ -4,6 +4,7 @@ from .models import Subject, User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
+from datetime import datetime
 
 auth = Blueprint('auth', __name__)
 
@@ -48,7 +49,12 @@ def singup():
         # TODO : le code d'inivatation
             flash("Code d'inivation invalide !", category='error')
         
-        else: #add user to the database
+        else: # add user to the database
+            # write the in log
+            f = open("./logs/code.log", "a")
+            time = datetime.now()
+            f.write(f"{email}-{pseudo}-{code};{time}\n")
+            f.close()
             user = User.query.filter_by(email=email).first() #check if user is alerady in
             if user:
                 flash("Email invalide", category='error')
