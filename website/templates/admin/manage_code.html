@@ -4,25 +4,39 @@
 <br />
 <br />
 <br />
-<form method="post">
-    <h3 align="center">Créer un code</h3>
-    <div class="form-group">
-        <label for="code">Code d'invitation</label>
-        <input type="text" class="form-control" id="code" name="code" placeholder="Entrez le code d'invitation" oninput="this.value = this.value.toUpperCase()">
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Génerer</button>
+<h3 align="center">Génerer un code d'invitation</h3>
+
+
+<div class="row">
+  <div class="mx-auto col-10 col-md-8 col-lg-6">
+Pour avoir un nombre illimité d'utilisations, mettez -1.
+<form class="form-inline" method="post">
+  <div class="form-group mb-2">
+    <label for="code" class="sr-only">Code d'invitation</label>
+    <input type="text" class="form-control" id="code" name="code" placeholder="Entrez le code" oninput="this.value = this.value.toUpperCase()">
+  </div>
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="max_usage" class="sr-only">Password</label>
+    <input type="number" class="form-control" id="max_usage" name="max_usage" placeholder="42" value="-1">
+  </div>
+  <button type="submit" class="btn btn-primary mb-2">Génerer</button>
 </form>
+  </div>
+</div>
+
+<br />
+<br />
 
 <h3 align="center">Code disponible :</h3>
 
 
 
   <div class="row">
-    <div class="col-4">
+    <div class="mx-auto col-lg-6">
       <div class="list-group" id="list-tab" role="tablist">
         {%for inv in Invite.query.all()%}
-        <a class="list-group-item list-group-item-action " id="list-home-list" data-toggle="list" href="#{{inv.code}}" role="tab" aria-controls="home">{{inv.code}} <span class="badge badge-primary badge-pill">{{inv.usages}}</span> </a>
+        <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#{{inv.code}}" role="tab" aria-controls="home"> {{inv.code}} 
+          <span class="badge badge-primary badge-pill">{{inv.usages}} / {% if inv.max %} {{inv.max}} {%else%} ∞ {%endif%} </span> </a>
         {%endfor%}
       </div>
     </div>
@@ -39,15 +53,20 @@
  <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">Logs</th>
-      <th scope="col">Date ?</th>
+      <th scope="col">Mail</th>
+      <th scope="col">Pseudo</th>
+      <th scope="col">Code</th>
+      <th scope="col">Date</th>
     </tr>
   </thead>
   <tbody>
     {%for l in logs.split('\n')%}
     <tr>
-      <td>{{l}}</td>
-      <td>N/A</td>
+      {% set s = l.split(';') %}
+      <td>{{s[0]}}</td>
+      <td>{{s[1]}}</td>
+      <td>{{s[2]}}</td>
+      <td>{{s[3]}}</td>
     </tr>
     {%endfor%}
   </tbody>

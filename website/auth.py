@@ -4,6 +4,7 @@ from .models import Subject, User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
+from datetime import datetime
 
 auth = Blueprint('auth', __name__)
 
@@ -38,22 +39,26 @@ def singup():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
         code = request.form.get('code')
-        print(request.form)
-        # verifier les info
-        if len(pseudo) < 2 or len(pseudo) > 12 : #precheck
+        # precheck
+        if len(pseudo) < 2 or len(pseudo) > 12 :
             flash("Pseudo invalide !", category='error')
         elif len(password1)==0 or password1 != password2:
-            flash("Les mots de passe ne sont pas valide !", category='error')
+            flash("Les mots de passe ne sont pas indentique / invalide !", category='error')
         elif len(code) < 3: 
         # TODO : le code d'inivatation
             flash("Code d'inivation invalide !", category='error')
         
-        else: #add user to the database
+        else: # add user to the database
+            # write the in log
+            f = open("./logs/code.log", "a")
+            time = datetime.now()
+            f.write(f"{email}-{pseudo}-{code};{time}\n")
+            f.close()
             user = User.query.filter_by(email=email).first() #check if user is alerady in
             if user:
                 flash("Email invalide", category='error')
             else:
-                NewUser = User(email=email, pseudo=pseudo, password=generate_password_hash(password1, method='sha256'), role=2)
+                NewUser = User(email=email, pseudo=pseudo, password=generate_password_hash(password1, method='sha256'), role=1) # todo : code d'invit link au role
                 db.session.add(NewUser)
                 db.session.commit()
                 login_user(NewUser)
