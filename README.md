@@ -20,7 +20,7 @@ This project is an old archive just restored. Setup instructions and massive ref
   - [X] verifier si il n'existe pas deja
   - [ ] les delete
   - [ ] systeme au login fonctionnel
-  - [ ] logs
+  - [X] logs
 
 ## littls bugs:
   - [ ] soucis de date sur les poste

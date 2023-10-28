@@ -5,7 +5,7 @@ import string
 from flask import Blueprint, render_template, send_from_directory, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 
-from sqlalchemy import desc
+from sqlalchemy import desc, asc
 
 from .defaultSub import GetSupp
 from .models import Note, Subject, User, Invite, UserRole
@@ -141,11 +141,11 @@ def manage_user():
         print(request.form)
     page = request.args.get('sort')
     if page == 'role':
-            ulist = db.session.query(User).order_by(desc(User.role))
+            ulist = db.session.query(User).order_by(asc(User.role))
     elif page == 'name':
-        ulist = db.session.query(User).order_by(desc(User.pseudo))
+        ulist = db.session.query(User).order_by(asc(User.pseudo))
     else:
-            ulist = db.session.query(User).order_by(desc(User.id))
+            ulist = db.session.query(User).order_by(asc(User.id))
     return render_template("admin/manage_user.html", user=current_user, Subject=Subject, users=ulist)
     
  
