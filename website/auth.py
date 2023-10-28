@@ -39,12 +39,11 @@ def singup():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
         code = request.form.get('code')
-        print(request.form)
-        # verifier les info
-        if len(pseudo) < 2 or len(pseudo) > 12 : #precheck
+        # precheck
+        if len(pseudo) < 2 or len(pseudo) > 12 :
             flash("Pseudo invalide !", category='error')
         elif len(password1)==0 or password1 != password2:
-            flash("Les mots de passe ne sont pas valide !", category='error')
+            flash("Les mots de passe ne sont pas indentique / invalide !", category='error')
         elif len(code) < 3: 
         # TODO : le code d'inivatation
             flash("Code d'inivation invalide !", category='error')
@@ -59,7 +58,7 @@ def singup():
             if user:
                 flash("Email invalide", category='error')
             else:
-                NewUser = User(email=email, pseudo=pseudo, password=generate_password_hash(password1, method='sha256'), role=2) # todo : code d'invit link au role
+                NewUser = User(email=email, pseudo=pseudo, password=generate_password_hash(password1, method='sha256'), role=1) # todo : code d'invit link au role
                 db.session.add(NewUser)
                 db.session.commit()
                 login_user(NewUser)

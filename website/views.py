@@ -8,7 +8,7 @@ from flask_login import login_required, current_user
 from sqlalchemy import desc
 
 from .defaultSub import GetSupp
-from .models import Note, Subject, User, Invite
+from .models import Note, Subject, User, Invite, UserRole
 from . import db
 import json
 
@@ -135,6 +135,8 @@ def manage_code():
 @views.route('/manage-user', methods= ['GET','POST'])
 @login_required
 def manage_user():
+    if current_user.role != UserRole.admin:
+        return render_template("404.html", user=current_user, Subject=Subject)
     if request.method == 'POST':
         print(request.form)
     page = request.args.get('sort')
