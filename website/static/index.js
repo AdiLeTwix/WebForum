@@ -7,3 +7,13 @@ function deleteNote(noteId) {
         window.location.href = "/my";
     });
 }
+
+function deleteCode(codeID) {
+    var id = parseInt(codeID)
+    fetch("/remove-code", {
+        method: "POST",
+        body: JSON.stringify({ codeID: id }),
+    }).then((_res) => {
+        window.location.href = "/manage-code";
+    });
+}

@@ -36,14 +36,25 @@ Pour avoir un nombre illimité d'utilisations, mettez -1.
       <div class="list-group" id="list-tab" role="tablist">
         {%for inv in Invite.query.all()%}
         <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#{{inv.code}}" role="tab" aria-controls="home"> {{inv.code}} 
-          <span class="badge badge-primary badge-pill">{{inv.usages}} / {% if inv.max %} {{inv.max}} {%else%} ∞ {%endif%} </span> </a>
+          <span class="badge badge-primary badge-pill">{{inv.usages}} / {% if inv.max and inv.max != -1 %} {{inv.max}} {%else%} ∞ {%endif%} </span> </a>
         {%endfor%}
       </div>
     </div>
-    <div class="col-8">
+    <div class="mx-auto col-lg-6">
       <div class="tab-content" id="nav-tabContent">
         {%for inv in Invite.query.all()%}
-        <div class="tab-pane fade" id="{{inv.code}}" role="tabpanel" aria-labelledby="list-profile-list">TODO </div>
+        <div class="tab-pane fade" id="{{inv.code}}" role="tabpanel" aria-labelledby="list-profile-list">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Infos {{inv.code}}</h5>
+                <p>ID: {{inv.id}}</p>
+                <p>Usages: {{inv.usages}} / {% if inv.max and inv.max != -1 %} {{inv.max}} {%else%} ∞ {%endif%}</p>
+                <p>Créer par: {{inv.creator}}</p>
+                <p>Utilisé par: {{inv.users}}</p>
+                <button type="button" class="btn btn-primary btn-danger"  onClick="deleteCode('{{ inv.id }}')" >Supprimer</button>
+            </div>  
+        </div>
+        </div>
         {%endfor%}
       </div>
     </div>

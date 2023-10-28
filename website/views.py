@@ -120,7 +120,7 @@ def manage_code():
         if exist:
             flash("Ce code existe déja", category='error')
         else:
-            newInv = Invite(code = c, usages=0, max=m)
+            newInv = Invite(code = c, usages=0, max=m, creator=current_user.pseudo)
             db.session.add(newInv)
             db.session.commit()
             flash("Code ajouté", category='sucesse')
@@ -130,6 +130,24 @@ def manage_code():
     l = f.read() # todo : true code logs
     f.close()
     return render_template("admin/manage_code.html", user=current_user, Subject=Subject, Invite=Invite, logs=l)
+
+
+@views.route('/remove-code', methods= ['POST'])
+@login_required
+def remove_code():
+    if current_user.role != UserRole.admin:
+        return render_template("404.html", user=current_user, Subject=Subject)
+    code = json.loads(request.data)
+    codeID = code['codeID']
+    sinv = Invite.query.get(codeID)
+    if sinv:
+        db.session.delete(sinv)
+        db.session.commit()
+        flash('Code d\'invitation suprpimé', category='info')
+    else:
+        flash("Impossible de faire ceci", category='error')
+    return jsonify({})
+    
 
 
 @views.route('/manage-user', methods= ['GET','POST'])

@@ -39,10 +39,11 @@ class Invite(db.Model):
     """Codes d'inivtations
 
     Args:
-        db (_type_): id + code + users + usages (int)
+        db (_type_): id + code + creator + usages (int)
     """
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.String(25))
     users = db.relationship('User')
     usages = db.Column(db.Integer)
     max = db.Column(db.Integer)
+    creator = db.Column(db.String(42)) # Save pseudo as string for the logs
