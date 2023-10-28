@@ -52,7 +52,7 @@ def singup():
             # write the in log
             f = open("./logs/code.log", "a")
             time = datetime.now()
-            f.write(f"{email}-{pseudo}-{code};{time}\n")
+            f.write(f"{email};{pseudo};{code};{time}\n")
             f.close()
             user = User.query.filter_by(email=email).first() #check if user is alerady in
             if user:
